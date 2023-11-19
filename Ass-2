@@ -1,0 +1,231 @@
+bvcoew@bvcoew-OptiPlex-3000:~$ sudo bash
+[sudo] password for bvcoew:
+root@bvcoew-OptiPlex-3000:~# mysql
+Welcome to the MySQL monitor. Commands end with ; or \g. Your MySQL connection id is 4
+Server version: 5.7.42-0ubuntu0.18.04.1 (Ubuntu) Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates. Other names may be trademarks of their respective owners.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+mysql> create database axis; Query OK, 1 row affected (0.00 sec) mysql> use axis; Database changed mysql> show databases; +--------------------+
+| Database | +--------------------+
+| information_schema |
+| abc
+| ass2
+| assigmnet2
+| axis
+| bank
+| banking
+| book
+| bookish
+| books
+| borrower
+| bvcoew
+| comp
+| employee
+| libararies
+| | library |
+| mysql
+| performance_schema |
+| supplier
+| sys
+| user
+| |
+| |
+| |
+|
+|
+| |
+|
+|
+| |
+|
+| |
+| xyz | +--------------------+ 22 rows in set (0.01 sec)
+mysql> show tables; Empty set (0.00 sec)
+1. create table person(driver_id,name,address)
+mysql> create table person(driver_id int,name varchar(15),address varchar(20),primary key(driver_id));
+Query OK, 0 rows affected (0.01 sec) mysql>
+describe person;
++-----------+-------------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra | +-----------+-------------+------+-----+---------+-------+
+| driver_id | int(11) | NO | PRI | NULL | |
+| name | varchar(15) | YES | | NULL | |
+| address | varchar(20) | YES | | NULL | | +-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+mysql> insert into person values('157','Purva','Pune'); Query OK, 1 row affected (0.01 sec)
+mysql> insert into person values('177','Aditi','Mumbai'); Query OK, 1 row affected (0.01 sec)
+mysql> select* from person; +-----------+-------+---------+
+| driver_id | name | address | +-----------+-------+---------+
+| 157 | Purva | Pune |
+| 177 | Aditi | Mumbai | +-----------+-------+---------+
+2 rows in set (0.00 sec)
+2. create table participated(driver_id, license,report_number,damage_amount) foreign key,driver_id, license ,report_number
+mysql> create table participated(driver_id int,license varchar(15),report_no intaadititanksale@gmail.com
+,damage_amt int, foreign key(driver_id) references person(driver_id)); Query OK, 0 rows affected (0.01 sec) mysql>
+describe participated; +------------+-------------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra | +------------+-------------+------+-----+---------+-------+
+| driver_id | int(11) | YES | MUL | NULL | |
+
+| license | varchar(15) | YES |
+| report_no | int(11) | YES |
+| damage_amt | int(11) | YES | +------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+mysql> insert into participated values('157','MH12','1','1700'); Query OK, 1 row affected (0.01 sec)
+mysql> select* from participated; +-----------+---------+-----------+------------+
+| driver_id | license | report_no | damage_amt | +-----------+---------+-----------+------------+
+| 157 | MH12 | 1 | 1700 | +-----------+---------+-----------+------------+ 1
+row in set (0.01 sec)
+3. create table car(license,model,year) mysql> create table car(license varchar(15),model varchar(15),year int,primary key(license));
+Query OK, 0 rows affected (0.02 sec) mysql>
+describe car;
++---------+-------------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra | +---------+-------------+------+-----+---------+-------+
+| license | varchar(15) | NO | PRI | NULL | | | model | varchar(15) | YES | | NULL | |
+| year | int(11) | YES | | NULL | | +---------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+mysql> insert into car values('MH12','BMW','2023'); Query OK, 1 row affected (0.01 sec) mysql>
+select* from car; +---------+-------+------+
+| license | model | year |
++---------+-------+------+
+| MH12 | BMW | 2023 |
++---------+-------+------+ 1
+row in set (0.00 sec)
+mysql> insert into car values('MH09','wagonR','2022'); Query OK, 1 row affected (0.01 sec)
+mysql> select* from car; +---------+--------+------+ | license | model | year | +---------+--------+------+
+| MH09 | wagonR | 2022 |
+| MH12 | BMW | 2023 | +---------+--------+------+
+| NULL | | NULL |
+| |
+|
+| NULL |
+
+2 rows in set (0.00 sec)
+4. create table owns(driver_id, license) mysql> create table owns(driver_id int,license varchar(15),primary key(license)); Query OK, 0 rows affected (0.01 sec) mysql> insert into owns values('157','MH12'); Query OK, 1 row affected (0.01 sec)
+mysql> select* from owns; +-----------+---------+
+| driver_id | license | +-----------+---------+
+| 157 | MH12 | +-----------+---------+
+1 row in set (0.00 sec)
+mysql> insert into owns values('177','MH09'); Query OK, 1 row affected (0.00 sec)
+mysql> select* from owns; +-----------+---------+
+| driver_id | license | +-----------+---------+
+| 177 | MH09 |
+| 157 | MH12 | +-----------+---------+
+2 rows in set (0.00 sec)
+5. create table accident(report_no, date,location) mysql> create table accident1(report_no int,date int,location varchar(15),primary key(report_no));
+Query OK, 0 rows affected (0.04 sec)
+mysql> describe accident1; +-----------+-------------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra | +-----------+-------------+------+-----+---------+-------+
+| report_no | int(11) | NO | PRI | NULL | | | date | int(11) | YES | | NULL | |
+| location | varchar(15) | YES | | NULL | | +-----------+-------------+------+-----+---------+-------+ 3 rows in set (0.00 sec)
+6. Display driver_name from Pune
+mysql> select* from person where address='Pune'; +-----------+-------+---------+
+| driver_id | name | address | +-----------+-------+---------+
+
+| 157 | Purva | Pune | +-----------+-------+---------+ 1 row in set (0.00 sec)
+7.Find all i10 model car.
+mysql> insert into car values('MH0','i10','2003'); Query OK, 1 row affected (0.01 sec)
+mysql> insert into car values('MH02','i10','2017'); Query OK, 1 row affected (0.00 sec)
+mysql> select* from car where model='i10'; +---------+-------+------+
+| license | model | year | +---------+-------+------+
+| MH0 | i10 | 2003 | | MH02 | i10 | 2017 | +---------+-------+------+
+2 rows in set (0.00 sec)
+8. Find the license of driver involved in accident with damage amount greater than 1 lakh.
+mysql> insert into person values('199','Neeraja','Pune'); Query OK, 1 row affected (0.01 sec)
+mysql> insert into participated values('199','MH07','5','188009'); Query OK, 1 row affected (0.01 sec)
+mysql> select* from participated; +-----------+---------+-----------+------------+
+| driver_id | license | report_no | damage_amt | +-----------+---------+-----------+------------+
+| 157 | MH12 |
+| 177 | MH09 |
+| 199 | MH07 | +-----------+---------+-----------+------------+ 3 rows in set (0.00 sec)
+mysql> select* from participated where damage_amt>'100000'; +-----------+---------+-----------+------------+
+| driver_id | license | report_no | damage_amt | +-----------+---------+-----------+------------+
+| 177 | MH09 | 2 | 200000 |
+| 199 | MH07 | 5 | 188009 | +-----------+---------+-----------+------------+ 2 rows in set (0.00 sec)
+1 | 2 | 5 |
+1700 | 200000 | 188009 |
+
+9.Find all accident on Pune-Satara Road. mysql> select* from accident1 where location='Pune-Satara Rd'; +-----------+------+----------------+
+| report_no | date | location | +-----------+------+----------------+
+| 1 | 2022 | Pune-Satara Rd |
+| 5 | 2022 | Pune-Satara Rd | +-----------+------+----------------+ 2 rows in set (0.00 sec)
+10.Find driver_id who are not involved in any accident.
+mysql> select distinct name,driver_id from person where driver_id not in(select driver_id from participated); Empty set (0.01 sec)
+mysql> insert into person values('123','Sam','Goa'); Query OK, 1 row affected (0.02 sec)
+mysql> select distinct name,driver_id from person where driver_id not in(select driver_id from participated); +------+-----------+
+| name | driver_id |
++------+-----------+
+| Sam | 123 | +------+-----------+
+1 row in set (0.00 sec)
+11.Find the average damage_amount. mysql> select avg(damage_amt) from participated; +-----------------+
+| avg(damage_amt) |
++-----------------+
+| 129903.0000 | +-----------------+
+1 row in set (0.00sec)
+12.Find maximum damage_amount on Pune-
+Mumbai Road.
+mysql> select max(damage_amt)from participated join accident1 using( report_no) where location='Pune-Mumbai Rd';
++-----------------+
+| max(damage_amt) |
++-----------------+
+| 18890 |
++-----------------+
+1 row in set (0.00 sec)
+
+13.Find all accidents that occured in year 2007. mysql> insert into accident1 values('27','2007','Pun-Mum Exway'); Query OK, 1 row affected (0.01 sec)
+mysql> select* from accident1 where date='2007'; +-----------+------+---------------+
+| report_no | date | location | +-----------+------+---------------+
+| 27 | 2007 | Pun-Mum Exway | +-----------+------+---------------+ 1
+row in set (0.00 sec)
+14.Find car registered in year before 2005.
+mysql> select* from accident1 where date<'2005'; Empty set (0.00 sec)
+15.Find all driver_name with model of car. mysql> select name,model from person p inner join participated q on p.driver_id=q.driver_id inner join car c on c.license=q.license; +-------+--------+
+| name | model |
++-------+--------+
+| Purva | BMW | | Aditi | wagonR | +-------+--------+
+3 rows in set (0.01 sec)
+16.Update Model Honda from year 2015 to 2012
+mysql> update car set year='2012' where model='Honda'; Query OK, 1 row affected (0.01 sec) Rows
+matched: 1 Changed: 1 Warnings: 0
+mysql> select* from car; +---------+--------+------+ | license | model | year | +---------+--------+------+
+| MH0
+| MH02
+| MH09
+| MH12
+| MH68 +---------+--------+------+
+| i10 | 2003 |
+| i10 | 2017 |
+| wagonR | 2022 | | BMW | 2023 | | Honda | 2012 |
+4 rows in set (0.00 sec)
+17.Find person who owns car but participated in accident
+
+mysql> insert into owns values('299','MH03'); Query OK, 1 row affected (0.01 sec)
+mysql> select* from owns; +-----------+---------+
+| driver_id | license | +-----------+---------+
+| 299 | MH03 |
+| 177 | MH09 |
+| 157 | MH12 | +-----------+---------+ 3 rows in set (0.00 sec)
+mysql> select v.name,v.driver_id from person v inner join participated r on v.driver_id=r.driver_id inner join owns d on r.driver_id=d.driver_id; +-------+-----------+ |
+name | driver_id |
++-------+-----------+
+| Aditi | 177 |
+| Purva | 157 |
++-------+-----------+
+2 rows in set (0.00 sec)
+18. Find average damage amount on Pune Mumbai Express Way
+mysql> select MAX(damage_amt) from participated join accident1 using (report_no) where location='Pune-Mumbai Rd';
++-----------------+
+| MAX(damage_amt) |
++-----------------+
+| 18890 | +-----------------+
+1 row in set (0.00 sec)
+19. Find Maximum and minimum damage amount.
+mysql> select max(damage_amt) from participated; +-----------------+
+| max(damage_amt) |
++-----------------+
+| 200000 | +-----------------+
+1 row in set (0.00 sec)
+mysql> select min(damage_amt) from participated; +-----------------+
+| min(damage_amt) |
++-----------------+
+
+| 1700 | +-----------------+
+1 row in set (0.00 sec)
